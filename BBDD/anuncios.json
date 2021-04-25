@@ -1,0 +1,55 @@
+{
+  "anuncios": [ 
+  {
+    "name": "Mobile phone", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "isType": "busca",
+    "price": 350.15,
+    "image": "/images/mobile.jpg",
+    "tags": ["mobile", "lifestyle", "work"]
+  }, {
+    "name": "Motorbike",
+    "isType": "vende", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 1500.00,
+    "image": "/images/motorbike.jpg",
+    "tags": ["lifestyle", "motor"]
+  }, {
+    "name": "Agenda",
+    "isType": "busca", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 8.00,
+    "image": "/images/agenda.jpg",
+    "tags": ["lifestyle", "work"]
+  }, {
+    "name": "Mesa",
+    "isType": "vende", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 180.00,
+    "image": "/images/desk.jpg",
+    "tags": ["work"]
+  }, {
+    "name": "Televisión",
+    "isType": "busca", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 280.00,
+    "image": "/images/tv.jpg",
+    "tags": ["work", "lifestyle"]
+  }, {
+    "name": "Bicicleta",
+    "isType": "vende", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 70.00,
+    "image": "/images/bicycle.jpg",
+    "tags": ["lifestyle", "motor"]
+  }, {
+    "name": "Tabla de padel surf",
+    "isType": "vende", 
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta malesuada ex, rutrum mattis velit hendrerit sed.",
+    "price": 60.00,
+    "image": "/images/padel.jpg",
+    "tags": ["lifestyle"]
+  }]
+}
+
+
