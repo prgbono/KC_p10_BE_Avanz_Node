@@ -2,29 +2,30 @@ require('./../lib/connectMongoose');
 const Ad = require('./../models/Ad');
 const mongoose = require('mongoose');
 
-async function initDB(){
+async function initDB() {
   try {
     console.log('Initializing DB...');
-    
-    // Delete db collection 
+
+    // Delete db collection
     await Ad.deleteMany();
-    console.log(`       ...Ads collection deleted`)
-    
-    // Read mock data from json file 
+    console.log(`       ...Ads collection deleted`);
+
+    // Read mock data from json file
     const adsFromJson = require('./anuncios.json');
-    console.log(`       ...Ads read from json file`)
+    console.log(`       ...Ads read from json file`);
 
-    // Populate db collection 
+    // Populate db collection
     await Ad.insertMany(adsFromJson.anuncios);
-    console.log(`       ...new ads added to db`)
+    console.log(`       ...new ads added to db`);
 
-    // Close db 
+    // Close db
     mongoose.connection.close();
-
   } catch (error) {
-    console.log('It has been some error while the DB init script, err: ',error);
+    console.log(
+      'It has been some error while the DB init script, err: ',
+      error,
+    );
   }
 }
 
-initDB();
-
+initDB().catch((err) => console.error('Error initializing the database!', err));
