@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-// db connection 
+// db connection
 require('./lib/connectMongoose');
 
 // view engine setup
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/ads', require('./routes/api/ads'));
 app.use('/api/tags', require('./routes/api/tags'));
 
- /**
+/**
  * Rutas del Website
  */
 
@@ -37,18 +37,23 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-
+app.use(function (err, req, res, next) {
   // es un error de validación?
   if (err.array) {
     const errorInfo = err.array({ onlyFirstError: true })[0];
     err.message = `Not valid - ${errorInfo.param} ${errorInfo.msg}`;
     err.status = 422;
+  }
+
+  if (isAPIRequest(req)) {
+    debugger;
+    res.json({ error: err.message });
+    return;
   }
 
   // set locals, only providing error in development
@@ -59,5 +64,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function isAPIRequest(req) {
+  return req.originalUrl.indexOf('/api') === 0;
+}
 
 module.exports = app;
