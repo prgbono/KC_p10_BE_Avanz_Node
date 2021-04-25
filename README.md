@@ -10,8 +10,9 @@
 
 1. `./bin/mongod --dbpath ./data/db` - Start a MongoDB local instance with
 2. `npm install`
-3. `npm run installDB` - Init db.
-4. `npm run dev` -> Run an http server on localhost:3000
+3. //FIXME: Copy .env file to .env and review the config
+4. `npm run installDB` - Init db.
+5. `npm run dev` -> Run an http server on localhost:3000
 
 ## API Methods
 

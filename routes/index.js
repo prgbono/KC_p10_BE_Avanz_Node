@@ -5,9 +5,12 @@ const asyncHandler = require('express-async-handler');
 const adsProvider = require('../lib/adsProvider');
 
 /* GET / -> homePage */
-router.get('/', asyncHandler(async function(req, res, next) {
-  res.locals.ads = await adsProvider.getAds(req);
-  res.render('index', { title: 'NodePop' });
-}));
+router.get(
+  '/',
+  asyncHandler(async function (req, res, next) {
+    res.locals.ads = await adsProvider.getAds(req);
+    res.render('index', { title: 'NodePop BE Avanzado' });
+  }),
+);
 
 module.exports = router;
