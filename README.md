@@ -6,11 +6,12 @@
 
 ## THIS PROJECT STARTS FROM PREVIOUS REPO -https://github.com/prgbono/KC_p4_introNodeJS
 
-## Init the project with these 3 steps
+## Init the project in few steps:
 
 1. `./bin/mongod --dbpath ./data/db` - Start a MongoDB local instance with
-2. `npm run installDB` - Init db.
-3. `npm run dev` -> Run an http server on localhost:3000
+2. `npm install`
+3. `npm run installDB` - Init db.
+4. `npm run dev` -> Run an http server on localhost:3000
 
 ## API Methods
 
