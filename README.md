@@ -11,7 +11,7 @@
 1. `./bin/mongod --dbpath ./data/db` - Start a MongoDB local instance with
 2. `npm install`
 3. Copy .env file to .env and review the config
-4. `npm run installDB` - Init db. [Optional, if you want to refresh / init the database]
+4. [`npm run installDB`] - Init db. [Optional], if you want to refresh / init the database
 5. `npm run dev` -> Run an http server on localhost:3000
 
 ## API Methods

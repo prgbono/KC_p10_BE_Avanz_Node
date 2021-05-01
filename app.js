@@ -3,9 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const loginController = require('./controllers/loginController');
 
 var app = express();
 
@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  * Rutas del Api
  */
+app.use('/api/authenticate', loginController.loginApi);
 app.use('/api/ads', require('./routes/api/ads'));
 app.use('/api/tags', require('./routes/api/tags'));
 
@@ -51,7 +52,7 @@ app.use(function (err, req, res, next) {
   }
 
   if (isAPIRequest(req)) {
-    debugger;
+    // console.log('All errors go through here');
     res.json({ error: err.message });
     return;
   }

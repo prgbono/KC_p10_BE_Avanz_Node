@@ -22,9 +22,12 @@ const userSchema = mongoose.Schema(
   },
 );
 
-//TODO: Check if This will return a promise!
 userSchema.statics.hashPass = function (passNotEncrypted) {
   return bcrypt.hash(passNotEncrypted, 5);
+};
+
+userSchema.methods.isCorrectPass = function (plainPass) {
+  return bcrypt.compare(plainPass, this.pass);
 };
 
 // Model

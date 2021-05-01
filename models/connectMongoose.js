@@ -11,14 +11,10 @@ mongoose.connection.once('open', () => {
   console.log('DB up and running at', mongoose.connection.name);
 });
 
-console.log(
-  'connectMongoose.js, process.env.MONGODB_CONNECTION_STR: ',
-  process.env.MONGODB_CONNECTION_STR,
-);
-
 mongoose.connect(process.env.MONGODB_CONNECTION_STR, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 module.exports = mongoose.connection;
