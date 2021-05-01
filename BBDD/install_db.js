@@ -1,22 +1,30 @@
-require('./../lib/connectMongoose');
-const Ad = require('./../models/Ad');
-const mongoose = require('mongoose');
+require('dotenv').config();
+
+const { connectMongoose, mongoose, Ad, User } = require('./../models');
 
 async function initDB() {
   try {
     console.log('Initializing DB...');
 
-    // Delete db collection
+    //TODO; Refactor init collections
+    // await initAds();
+    // await initUsers();
+
+    // Delete db
     await Ad.deleteMany();
-    console.log(`       ...Ads collection deleted`);
+    await User.deleteMany();
+    console.log(`       ...Ads and Users collections deleted`);
 
-    // Read mock data from json file
+    // Read mock data from json files
     const adsFromJson = require('./anuncios.json');
-    console.log(`       ...Ads read from json file`);
+    const usersFromJson = require('./users.json');
+    console.log(`       ...Ads and Users data read from json file`);
 
-    // Populate db collection
+    // Populate db
     await Ad.insertMany(adsFromJson.anuncios);
-    console.log(`       ...new ads added to db`);
+    const usersHashed = await getUsersHashed(usersFromJson.users);
+    await User.insertMany(usersHashed);
+    console.log(`       ...new data added to db`);
 
     // Close db
     mongoose.connection.close();
@@ -26,6 +34,14 @@ async function initDB() {
       error,
     );
   }
+}
+
+function getUsersHashed(users) {
+  return Promise.all(
+    users.map(async (user) => {
+      return { ...user, pass: await User.hashPass(user.pass) };
+    }),
+  );
 }
 
 initDB().catch((err) => console.error('Error initializing the database!', err));
