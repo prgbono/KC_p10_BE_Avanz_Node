@@ -2,18 +2,22 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
-  
+
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <!-- <p>Welcome to <%= title %></p> -->
+    <p><%= __('Welcome to {{title}}.', {title})%></p>
 
     <% ads.forEach(ad => { %>
-      <p>Anuncio: <%= ad.name %>. Se <%= ad.isType %> <br />
-        Descrpción <%= ad.description %> <br /> 
-        Precio <%= ad.price %>. Tag/s: <%= ad.tags %><br /> 
-        <img src="<%= ad.image%>" alt=""></p>
+    <p>
+      Anuncio: <%= ad.name %>. Se <%= ad.isType %> <br />
+      <!-- <%= __('Advertisement: %><%= ad.name %>. Se <%= ad.isType %> <br /> -->
+      Descrpción <%= ad.description %> <br />
+      Precio <%= ad.price %>. Tag/s: <%= ad.tags %><br />
+      <img src="<%= ad.image%>" alt="" />
+    </p>
     <% }) %>
   </body>
 </html>

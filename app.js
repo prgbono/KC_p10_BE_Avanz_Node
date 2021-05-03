@@ -6,6 +6,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const loginController = require('./controllers/loginController');
+const i18n = require('./lib/i18nConfig.js');
 
 var app = express();
 
@@ -29,6 +30,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/authenticate', loginController.loginApi);
 app.use('/api/ads', require('./routes/api/ads'));
 app.use('/api/tags', require('./routes/api/tags'));
+
+// TODO: Quitar estos comentarios
+// // i18n - Prueba de que funciona
+// console.log(i18n.__('Welcome to NodeApi'));
+
+//i18n
+app.use(i18n.init);
 
 /**
  * Rutas del Website
