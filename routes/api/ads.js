@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
-
+const Ad = require('../../models/Ad');
 const asyncHandler = require('express-async-handler');
 const adsProvider = require('../../lib/adsProvider');
+const jwtAuth = require('../../lib/jwtAuth');
 
 // GET /api/ads -> List ads
 router.get(
   '/',
+  jwtAuth,
   asyncHandler(async function (req, res) {
     const response = await adsProvider.getAds(req);
     res.json(response);
@@ -16,6 +18,7 @@ router.get(
 // POST /api/ads (body)
 router.post(
   '/',
+  jwtAuth,
   asyncHandler(async (req, res) => {
     const adData = req.body;
     const ad = new Ad(adData);
@@ -27,6 +30,7 @@ router.post(
 // PUT /api/ads:id (body)
 router.put(
   '/:id',
+  jwtAuth, //TODO: NOT Tested!
   asyncHandler(async (req, res) => {
     const _id = req.params.id;
     const adData = req.body;
@@ -46,6 +50,7 @@ router.put(
 // DELETE /api/ads:id
 router.delete(
   '/:id',
+  jwtAuth, //TODO: NOT Tested!
   asyncHandler(async (req, res, next) => {
     const _id = req.params.id;
     await Ad.deleteOne({ _id }); // === { _id: _id}

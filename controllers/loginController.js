@@ -21,7 +21,7 @@ class LoginController {
       jwt.sign(
         { _id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: 60 * 5 * 1000 },
+        { expiresIn: '1h' },
         (err, accessToken) => {
           if (err) {
             next(err);

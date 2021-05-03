@@ -44,6 +44,8 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  console.log('This is the Error middleware, err: ', err);
+
   // es un error de validación?
   if (err.array) {
     const errorInfo = err.array({ onlyFirstError: true })[0];
