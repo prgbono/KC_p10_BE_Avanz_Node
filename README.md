@@ -6,6 +6,14 @@
 
 ## THIS PROJECT STARTS FROM PREVIOUS REPO -https://github.com/prgbono/KC_p4_introNodeJS
 
+## JWT
+
+- This project needs JWT header 'Authorization' in its requests.
+- The endpoint /api/authenticate retrieves a 1h valid accessToken.
+- Url '/api/ads' is protected by JWT. '/' (localhost:3000) also should be, it is not because there is no 'FrontEnd login page' implemented. So request to '/' works without set JWT header Authorization.
+  TODO: FrontEnd login page
+  TODO: Set JWT auth for '/' in /routes/index.js
+
 ## Init the project in few steps:
 
 1. `./bin/mongod --dbpath ./data/db` - Start a MongoDB local instance with
