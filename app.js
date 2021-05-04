@@ -31,11 +31,7 @@ app.use('/api/authenticate', loginController.loginApi);
 app.use('/api/ads', require('./routes/api/ads'));
 app.use('/api/tags', require('./routes/api/tags'));
 
-// TODO: Quitar estos comentarios
-// // i18n - Prueba de que funciona
-// console.log(i18n.__('Welcome to NodeApi'));
-
-//i18n
+//i18n - Set before UI pages!
 app.use(i18n.init);
 
 /**

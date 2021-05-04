@@ -1,4 +1,9 @@
 {
 	"Welcome to NodeApi": "Bienvenido a NodeApi",
-	"Welcome to {{title}}.": "Welcome to {{title}}."
+	"esto es una prueba": "esto es una prueba",
+	"Advertisement": "Anuncio",
+	"It is": "Se",
+	"Description": "Descripción",
+	"Price": "Precio",
+	"Welcome to": "Welcome to"
 }
