@@ -46,6 +46,7 @@ app.use('/', indexRouter);
 app.get('/login', loginController.index);
 app.post('/login', loginController.loginApi);
 app.use('/my-ads', myAdsRouter);
+app.use('/change-locale', require('./routes/change-locale.js'));
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
