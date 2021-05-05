@@ -19,6 +19,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').__express);
 
+// declaramos una variable global para todas las vistas. Con esto nos evitaríamos tener que pasarle el parámetro title desde el controlador a la vista
+// app.locals.title = 'NodeAPI';
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +43,8 @@ app.use(i18n.init);
  */
 
 app.use('/', indexRouter);
+app.get('/login', loginController.index);
+app.post('/login', loginController.loginApi);
 app.use('/my-ads', myAdsRouter);
 app.use('/users', usersRouter);
 

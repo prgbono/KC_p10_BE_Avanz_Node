@@ -3,6 +3,19 @@ const User = require('./../models/User.js');
 const jwt = require('jsonwebtoken');
 
 class LoginController {
+  /**
+   * GET /login
+   */
+  index(req, res, next) {
+    res.locals.email = '';
+    res.locals.error = '';
+    res.render('login', { title: 'NodePop BE Avanzado' });
+  }
+
+  /** TODO:
+   * POST /login
+   */
+
   /*
    * POST /api/authenticate
    */
