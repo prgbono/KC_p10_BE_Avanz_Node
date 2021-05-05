@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var myAdsRouter = require('./routes/my-ads');
 const loginController = require('./controllers/loginController');
 const i18n = require('./lib/i18nConfig.js');
 
@@ -39,6 +40,7 @@ app.use(i18n.init);
  */
 
 app.use('/', indexRouter);
+app.use('/my-ads', myAdsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
