@@ -7,7 +7,7 @@ const adsProvider = require('../../lib/adsProvider');
 const jwtAuth = require('../../lib/jwtAuth');
 var multer = require('multer');
 var multerConfig = multer({
-  dest: path.join(__dirname, './../../public/uploads'),
+  dest: path.join(__dirname, './../../public/images'),
   // Check extension file:
   fileFilter: (req, file, next) => {
     const filetypes = /jpeg|jpg|png|gif|webp|heic/;
@@ -27,6 +27,7 @@ var multerConfig = multer({
 // GET /api/ads -> List ads
 router.get(
   '/',
+  //TODO: FIXME: jwtAuth,
   jwtAuth,
   asyncHandler(async function (req, res) {
     const response = await adsProvider.getAds(req);
@@ -38,7 +39,8 @@ router.get(
 router.post(
   '/',
   multerConfig.single('image'),
-  jwtAuth,
+  // jwtAuth,
+  //TODO: FIXME: jwtAuth,
   asyncHandler(async (req, res) => {
     const ad = new Ad(req.body);
     ad.image =
