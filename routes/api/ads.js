@@ -5,12 +5,13 @@ const Ad = require('../../models/Ad');
 const asyncHandler = require('express-async-handler');
 const adsProvider = require('../../lib/adsProvider');
 const jwtAuth = require('../../lib/jwtAuth');
+const cote = require('cote');
 var multer = require('multer');
 var multerConfig = multer({
   dest: path.join(__dirname, './../../public/images'),
   // Check extension file:
   fileFilter: (req, file, next) => {
-    const filetypes = /jpeg|jpg|png|gif|webp|heic/;
+    const filetypes = /jpeg|jpg|png|gif|webp|heic/; //last 2 formats not supported??
     const mimetype = filetypes.test(file.mimetype);
     const fileExtension = filetypes.test(path.extname(file.originalname));
     if (!mimetype || !fileExtension) {
@@ -43,9 +44,27 @@ router.post(
   //TODO: FIXME: jwtAuth,
   asyncHandler(async (req, res) => {
     const ad = new Ad(req.body);
+
     ad.image =
       req.file.filename +
       path.extname(req.file.originalname).toLocaleLowerCase();
+
+    // Call microservice for making thumbnail 100x100 of the image
+    const requester = new cote.Requester({
+      name: 'ms_thumbnailMaker_client',
+    });
+    requester.send(
+      {
+        type: 'thumbnail',
+        pathToFileUploaded: req.file.path,
+        //TODO: Poner la ruta a la carpeta de imágenes como vble de entorno
+      },
+      (result) => {
+        console.log('ms_requester, result (ruta al thumbnail): ', result);
+      },
+    );
+
+    //add new ad to db
     const adCreated = await ad.save();
     res.status(201).json({ result: adCreated });
   }),

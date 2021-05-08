@@ -9,7 +9,7 @@
 ## JWT
 
 - This project needs JWT header 'Authorization' in its requests.
-- The endpoint /api/authenticate retrieves a 1h valid accessToken.
+- The endpoint /api/authenticate retrieves a FIXME: 1h valid accessToken.
 - Url '/api/ads' is protected by JWT. '/' (localhost:3000) also should be, it is not because there is no 'FrontEnd login page' implemented. So request to '/' works without set JWT header Authorization.
   TODO: FrontEnd login page
   TODO: Set JWT auth for '/' in /routes/index.js
@@ -20,7 +20,8 @@
 2. `npm install`
 3. Copy .env file to .env and review the config
 4. [`npm run installDB`] - Init db. [Optional], if you want to refresh / init the database
-5. `npm run dev` -> Run an http server on localhost:3000
+5. `npm run ms_thumbnailMaker` - start thumbmailMaker microservice.
+6. `npm start` -> Run an http server on localhost:3000
 
 ## API Methods
 
