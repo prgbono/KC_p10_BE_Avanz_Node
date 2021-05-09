@@ -49,7 +49,7 @@ router.post(
       req.file.filename +
       path.extname(req.file.originalname).toLocaleLowerCase();
 
-    // Call microservice for making thumbnail 100x100 of the image
+    // Call microservice for making thumbnail of the image
     const requester = new cote.Requester({
       name: 'ms_thumbnailMaker_client',
     });
@@ -59,13 +59,9 @@ router.post(
         pathToFileUploaded: req.file.path,
         destination: req.file.destination,
         filename: req.file.filename,
-        fileExtension: path.extname(req.file.originalname).toLocaleLowerCase(),
+        // fileExtension: path.extname(req.file.originalname).toLocaleLowerCase(),
       },
-      () => {
-        console.log('Thumbnail generated');
-        //TODO: MOve here the ad creation
-        // TODO: handle error if thumbnail not well created
-      },
+      // () => {} Not needed as ms is not retrieving anything
     );
 
     //add new ad to db
