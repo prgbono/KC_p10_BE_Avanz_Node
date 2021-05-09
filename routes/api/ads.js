@@ -23,7 +23,6 @@ var multerConfig = multer({
     return next(null, true);
   },
 });
-// }).single('image'); //TODO:HANDLING MULTER ERROR, see /POST
 
 // GET /api/ads -> List ads
 router.get(
