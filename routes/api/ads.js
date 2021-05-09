@@ -28,7 +28,6 @@ var multerConfig = multer({
 // GET /api/ads -> List ads
 router.get(
   '/',
-  //TODO: FIXME: jwtAuth,
   jwtAuth,
   asyncHandler(async function (req, res) {
     const response = await adsProvider.getAds(req);
@@ -40,11 +39,9 @@ router.get(
 router.post(
   '/',
   multerConfig.single('image'),
-  // jwtAuth,
-  //TODO: FIXME: jwtAuth,
+  jwtAuth,
   asyncHandler(async (req, res) => {
     const ad = new Ad(req.body);
-
     ad.image =
       req.file.filename +
       path.extname(req.file.originalname).toLocaleLowerCase();
@@ -61,7 +58,7 @@ router.post(
         filename: req.file.filename,
         // fileExtension: path.extname(req.file.originalname).toLocaleLowerCase(),
       },
-      // () => {} Not needed as ms is not retrieving anything
+      // () => {} Not needed as microservice is not retrieving anything
     );
 
     //add new ad to db
@@ -70,40 +67,10 @@ router.post(
   }),
 );
 
-// POST /api/ads (body) //TODO:HANDLING MULTER ERROR
-// router.post(
-//   '/',
-//   jwtAuth,
-//   multerConfig(req, res, function (err) {
-//     if (err instanceof multer.MulterError) {
-//       // Multer error occurred when uploading
-//       const error = new Error('Error uploading file');
-//       error.status = 400;
-//       next(error);
-//       return;
-//     } else if (err) {
-//       // Unknown error occurred when uploading
-//       const error = new Error('Unknown error');
-//       error.status = 400;
-//       next(error);
-//       return;
-//     }
-//     // This way the image is not optional //TODO: Add this to ReadMe
-//     asyncHandler(async (req, res) => {
-//       const ad = new Ad(req.body);
-//       ad.image =
-//         req.file.filename +
-//         path.extname(req.file.originalname).toLocaleLowerCase();
-//       const adCreated = await ad.save();
-//       res.status(201).json({ result: adCreated });
-//     });
-//   }),
-// );
-
 // PUT /api/ads:id (body)
 router.put(
   '/:id',
-  jwtAuth, //TODO: NOT Tested!
+  jwtAuth,
   asyncHandler(async (req, res) => {
     const _id = req.params.id;
     const adData = req.body;
@@ -123,7 +90,7 @@ router.put(
 // DELETE /api/ads:id
 router.delete(
   '/:id',
-  jwtAuth, //TODO: NOT Tested!
+  jwtAuth,
   asyncHandler(async (req, res, next) => {
     const _id = req.params.id;
     await Ad.deleteOne({ _id }); // === { _id: _id}
