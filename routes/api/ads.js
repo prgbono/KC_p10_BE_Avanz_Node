@@ -11,7 +11,7 @@ var multerConfig = multer({
   dest: path.join(__dirname, './../../public/images'),
   // Check extension file:
   fileFilter: (req, file, next) => {
-    const filetypes = /jpeg|jpg|png|gif|webp|heic/; //last 2 formats not supported??
+    const filetypes = /jpeg|jpg|bmp|tiff|png|gif/; //jimp supported formats
     const mimetype = filetypes.test(file.mimetype);
     const fileExtension = filetypes.test(path.extname(file.originalname));
     if (!mimetype || !fileExtension) {
@@ -57,10 +57,14 @@ router.post(
       {
         type: 'thumbnail',
         pathToFileUploaded: req.file.path,
-        //TODO: Poner la ruta a la carpeta de imágenes como vble de entorno
+        destination: req.file.destination,
+        filename: req.file.filename,
+        fileExtension: path.extname(req.file.originalname).toLocaleLowerCase(),
       },
-      (result) => {
-        console.log('ms_requester, result (ruta al thumbnail): ', result);
+      () => {
+        console.log('Thumbnail generated');
+        //TODO: MOve here the ad creation
+        // TODO: handle error if thumbnail not well created
       },
     );
 
