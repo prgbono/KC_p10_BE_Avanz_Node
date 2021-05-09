@@ -4,12 +4,14 @@
 
 ## Fco Ríos.
 
+Antes que nada, comentar que esta no es la práctica que me hubiera gustado entregar. Me hubiera gustado refactorizar y añadir los 'desafios' opcionales. Mi entrega es una entrega básica buscando no perder el paso del BootCamp. Sin que sirva de excusa, ser padre primerizo es bastante duro!
+
 ## THIS PROJECT STARTS FROM PREVIOUS REPO -https://github.com/prgbono/KC_p4_introNodeJS
 
 ## JWT
 
 - This project needs JWT header 'Authorization' in its requests.
-- The endpoint /api/authenticate retrieves a FIXME: 1h valid accessToken.
+- The endpoint /api/authenticate retrieves a 1h valid accessToken.
 - Url '/api/ads' is protected by JWT. '/' (localhost:3000) also should be, it is not because there is no 'FrontEnd login page' implemented. So request to '/' works without set JWT header Authorization.
   TODO: FrontEnd login page
   TODO: Set JWT auth for '/' in /routes/index.js
@@ -36,6 +38,11 @@ Get a list of current tags
 ### POST /api/ads (body)
 
 Insert a new ad. Data must be in the body.
+This endpoint trigger the microservice 'thumbnailMaker.js' which will create a thumbnail 100x100 aprox of the image uploaded. This thumbnail will be stored in /public/images folder in this way:
+
+- name_of_the_image_uploaded_thumbnail
+
+Thumbnails are not showed in the UI. They need stylising so I preferred to maintain the original and bigger image in http://localhost:3000/
 
 ### PUT /api/ads:id (body)
 
