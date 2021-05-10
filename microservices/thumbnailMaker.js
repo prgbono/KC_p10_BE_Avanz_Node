@@ -18,9 +18,13 @@ async function generateThumbnail(req) {
   const { pathToFileUploaded, destination, filename } = req;
   const img = await jimp.read(pathToFileUploaded);
   const thumbnail = img.clone();
+  const thumbnailName = `${filename.split('.')[0]}_thumbnail.${
+    filename.split('.')[1]
+  }`;
+
   thumbnail
     .scaleToFit(100, 100)
-    .writeAsync(`${destination}/${filename}_thumbnail`)
+    .writeAsync(`${destination}/${thumbnailName}`)
     .then(() => {
       return;
     })

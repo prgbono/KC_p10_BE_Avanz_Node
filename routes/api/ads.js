@@ -7,21 +7,28 @@ const adsProvider = require('../../lib/adsProvider');
 const jwtAuth = require('../../lib/jwtAuth');
 const cote = require('cote');
 var multer = require('multer');
-var multerConfig = multer({
-  dest: path.join(__dirname, './../../public/images'),
-  // Check extension file:
-  fileFilter: (req, file, next) => {
-    const filetypes = /jpeg|jpg|bmp|tiff|png|gif/; //jimp supported formats
-    const mimetype = filetypes.test(file.mimetype);
-    const fileExtension = filetypes.test(path.extname(file.originalname));
-    if (!mimetype || !fileExtension) {
-      const error = new Error('File selected is not a valid image');
-      error.status = 400;
-      next(error);
-      return;
-    }
-    return next(null, true);
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, './../../public/images'));
   },
+  filename: function (req, file, cb) {
+    // cb(null, file.fieldname + path.extname(file.originalname));
+    cb(null, file.originalname);
+  },
+  // TODO: Check extension file: --- Not working ---
+  // fileFilter: (req, file, next) => {
+  //   const filetypes = /jpeg|jpg|bmp|tiff|png|gif/; //jimp supported formats
+  //   const mimetype = filetypes.test(file.mimetype);
+  //   const fileExtension = filetypes.test(path.extname(file.originalname));
+  //   if (!mimetype || !fileExtension) {
+  //     const error = new Error('File selected is not a valid image');
+  //     error.status = 400;
+  //     next(error);
+  //     console.log('WRONG FILE TYPE');
+  //     return;
+  //   }
+  //   return next(null, true);
+  // },
 });
 
 // GET /api/ads -> List ads
@@ -37,32 +44,43 @@ router.get(
 // POST / api / ads(body);
 router.post(
   '/',
-  multerConfig.single('image'),
-  jwtAuth,
+  // multerConfig.single('image'),
+  // jwtAuth,
   asyncHandler(async (req, res) => {
-    const ad = new Ad(req.body);
-    ad.image =
-      req.file.filename +
-      path.extname(req.file.originalname).toLocaleLowerCase();
+    let upload = multer({ storage }).single('image');
+    upload(req, res, async function (err) {
+      if (err instanceof multer.MulterError) {
+        return res.status(400).json({ message: err });
+      } else if (err) {
+        return res.status(400).json({ message: err });
+      }
 
-    // Call microservice for making thumbnail of the image
-    const requester = new cote.Requester({
-      name: 'ms_thumbnailMaker_client',
+      const ad = new Ad(req.body);
+
+      ad.image =
+        req.file.filename +
+        path.extname(req.file.originalname).toLocaleLowerCase();
+
+      // Call microservice for making thumbnail of the image
+      const requester = new cote.Requester({
+        name: 'ms_thumbnailMaker_client',
+      });
+
+      requester.send(
+        {
+          type: 'thumbnail',
+          pathToFileUploaded: req.file.path,
+          destination: req.file.destination,
+          filename: req.file.filename,
+        },
+        //() => {},// Not needed as microservice is not retrieving anything
+      );
+
+      //add new ad to db
+      const adCreated = await ad.save();
+      res.status(201).json({ result: adCreated });
+      // FIXME: check view after inserting the new Ad
     });
-    requester.send(
-      {
-        type: 'thumbnail',
-        pathToFileUploaded: req.file.path,
-        destination: req.file.destination,
-        filename: req.file.filename,
-        // fileExtension: path.extname(req.file.originalname).toLocaleLowerCase(),
-      },
-      // () => {} Not needed as microservice is not retrieving anything
-    );
-
-    //add new ad to db
-    const adCreated = await ad.save();
-    res.status(201).json({ result: adCreated });
   }),
 );
 
