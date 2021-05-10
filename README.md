@@ -4,8 +4,6 @@
 
 ## Fco Ríos.
 
-Antes que nada, comentar que esta no es la práctica que me hubiera gustado entregar. Me hubiera gustado refactorizar y añadir los 'desafios' opcionales. Mi entrega es una entrega básica buscando no perder el paso del BootCamp. Sin que sirva de excusa, ser padre primerizo es bastante duro!
-
 ## THIS PROJECT STARTS FROM PREVIOUS REPO -https://github.com/prgbono/KC_p4_introNodeJS
 
 ## JWT
