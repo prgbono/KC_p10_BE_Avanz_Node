@@ -40,7 +40,7 @@ Get a list of current tags
 Insert a new ad. Data must be in the body.
 This endpoint trigger the microservice 'thumbnailMaker.js' which will create a thumbnail 100x100 aprox of the image uploaded. This thumbnail will be stored in /public/images folder in this way:
 
-- name_of_the_image_uploaded_thumbnail
+- randomName_thumbnail. This randomName will be the same for thumbnail and uploaded image.
 
 Thumbnails are not showed in the UI. They need stylising so I preferred to maintain the original and bigger image in http://localhost:3000/
 

@@ -30,7 +30,7 @@ class LoginController {
         next(error);
         return;
       }
-      // Correct credentials. Generate accessToken //TODO: check 5' expiration
+      // Correct credentials. Generate accessToken
       jwt.sign(
         { _id: user._id },
         process.env.JWT_SECRET,
