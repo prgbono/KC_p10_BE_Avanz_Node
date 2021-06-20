@@ -6,6 +6,11 @@
 
 ## THIS PROJECT STARTS FROM PREVIOUS REPO -https://github.com/prgbono/KC_p4_introNodeJS
 
+## This Readme file also covers práctica Módulo 12 - Configuración de servidores, DEPLOYING:
+
+- Node App deployed: http://ec2-3-220-12-170.compute-1.amazonaws.com/
+- React/Static app deployed: http://3.220.12.170/
+
 ## JWT
 
 - This project needs JWT header 'Authorization' in its requests.
