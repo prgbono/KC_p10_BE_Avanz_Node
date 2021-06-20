@@ -8,8 +8,9 @@
 
 ## This Readme file also covers práctica Módulo 12 - Configuración de servidores, DEPLOYING:
 
-- Node App deployed: http://ec2-3-220-12-170.compute-1.amazonaws.com/
-- React/Static app deployed: http://3.220.12.170/
+- Ejercicio 1 - Node App deployed: http://ec2-3-220-12-170.compute-1.amazonaws.com/
+  Alberto @kasappeal, en la carga inicial de la web se produce una carga de anuncios desde la BD sin necesidad de JWT. Ahí podrás ver la cabecera personalizada en los archivos estáticos (js, css, favicon e imágenes).
+- Ejercicio 2 - React/Static app deployed: http://3.220.12.170/
 
 ## JWT
 
